@@ -3,7 +3,7 @@
 
 // include_once 'menu.php';
 $model = new Pesanan();
-$pesanan = $model->Pesanan();
+$data_pesanan = $model->dataPesanan();
 
 // foreach ($data_produk as $row){
 //  print $row['kode'];
@@ -24,8 +24,10 @@ $pesanan = $model->Pesanan();
                         </div>
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                DataTable Example
+                               <!-- <i class="fas fa-table me-1"></i>
+                                DataTable Example -->
+                                <!--Membuat Tombol Mengarahkan ke file produk_form.php -->
+                                <a href="index.php?url=pesanan_form" class="btn btn-primary btn-sm"> Tambah </a>
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
@@ -35,6 +37,7 @@ $pesanan = $model->Pesanan();
                                             <th>Tanggal</th>
                                             <th>Total</th>
                                             <th>Id Pelanggan</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -43,12 +46,13 @@ $pesanan = $model->Pesanan();
                                             <th>Tanggal</th>
                                             <th>Total</th>
                                             <th>Id Pelanggan</th>
+                                            <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <?php
                                         $no = 1;
-                                        foreach($pesanan as $row){
+                                        foreach($data_pesanan as $row){
                                         
                                         ?>
                                         <tr>
@@ -56,6 +60,14 @@ $pesanan = $model->Pesanan();
                                             <td><?= $row['tanggal']?></td>
                                             <td><?= $row['total']?></td>
                                             <td><?= $row['pelanggan_id']?></td>
+                                            <td>
+                                                <form action="pesanan_controller.php" method="POST">
+                                                    <a class="btn btn-info btn-sm" href="index.php?url=pesanan_detail&id=<?= $row ['id']?>">Detail</a>
+                                                    <a class="btn btn-warning btn-sm">Ubah</a>
+                                                    <a class="btn btn-danger btn-sm">Hapus</a>
+                                                    <input type="hidden" name="idx" value="<?= $row['id']?>">
+                                                </form>
+                                                </td>
                                         </tr>
                                         <?php
                                         $no++;
