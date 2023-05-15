@@ -7,7 +7,7 @@ try {
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     // echo "koneksi sukses";
 }catch (PDOException $e){
-    echo 'Database Tidak Konek'.$e->getMassage();
+    echo 'Database Tidak Konek'.$e->getMessage();
 
 }
 ?>
