@@ -36,5 +36,11 @@ public function ubah($data){
     $ps = $this->koneksi->prepare($sql);
     $ps->execute($data);
 }
+
+public function hapus($id){
+    $sql = "DELETE FROM produk WHERE id=?";
+    $ps = $this->koneksi->prepare($sql);
+    $ps->execute([$id]);
+}
 }
 ?>

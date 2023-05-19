@@ -27,6 +27,17 @@ class Pelanggan{
     $ps =$this->koneksi->prepare($sql);
     $ps-> execute($data);
    }
+
+   public function ubah($data){
+    $sql = "UPDATE pelanggan SET kode=?, nama_pelanggan=?, jk=?, tmp_lahir=?, tgl_lahir=?, email=?, kartu_id=?, alamat=? WHERE id=?";
+    $ps = $this->koneksi->prepare($sql);
+    $ps->execute($data);
+}
+public function hapus($id){
+    $sql = " DELETE FROM pelanggan WHERE id=?";
+    $ps = $this->koneksi->prepare($sql);
+    $ps->execute([$id]);
+}
 }
 
 
