@@ -7,8 +7,7 @@ $data_produk = $model->dataProduk();
 
 // foreach ($data_produk as $row){
 //  print $row['kode'];
-// }
-
+// } 
 ?>
                         <h1 class="mt-4">Tables</h1>
                         <ol class="breadcrumb mb-4">
@@ -76,7 +75,7 @@ $data_produk = $model->dataProduk();
                                             <td>
                                                 <form action="produk_controller.php" method="POST">
                                                     <a class="btn btn-info btn-sm" href="index.php?url=product_detail&id=<?= $row ['id']?>">Detail</a>
-                                                    <a class="btn btn-warning btn-sm">Ubah</a>
+                                                    <a class="btn btn-warning btn-sm" href="index.php?url=product_form&idedit=<?= $row ['id']?>">Ubah</a>
                                                     <a class="btn btn-danger btn-sm">Hapus</a>
                                                     <input type="hidden" name="idx" value="<?= $row['id']?>">
                                                 </form>
