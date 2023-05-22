@@ -1,6 +1,5 @@
 <?php
 // include_once 'top.php';
-
 // include_once 'menu.php';
 $model = new Produk();
 $data_produk = $model->dataProduk();
@@ -8,6 +7,9 @@ $data_produk = $model->dataProduk();
 // foreach ($data_produk as $row){
 //  print $row['kode'];
 // } 
+$sesi = $_SESSION['MEMBER'];
+if(isset($sesi)){
+
 ?>
                         <h1 class="mt-4">Tables</h1>
                         <ol class="breadcrumb mb-4">
@@ -26,7 +28,12 @@ $data_produk = $model->dataProduk();
                                <!-- <i class="fas fa-table me-1"></i>
                                 DataTable Example -->
                                 <!--Membuat Tombol Mengarahkan ke file produk_form.php -->
+                                <?php
+                                 if($sesi['role'] != 'staff'){   
+                                                    ?>    
                                 <a href="index.php?url=product_form" class="btn btn-primary btn-sm"> Tambah </a>
+                                <?php 
+                                                } ?>
                             </div>
 
                             <div class="card-body">
@@ -74,11 +81,19 @@ $data_produk = $model->dataProduk();
                                             <td><?= $row['jenis_produk_id']?></td>
                                             <td>
                                                 <form action="produk_controller.php" method="POST">
-                                                    <a class="btn btn-info btn-sm" href="index.php?url=product_detail&id=<?= $row ['id']?>">Detail</a>
-                                                    <a class="btn btn-warning btn-sm" href="index.php?url=product_form&idedit=<?= $row ['id']?>">Ubah</a>
+                                                
+                                                <a class="btn btn-info btn-sm" href="index.php?url=product_detail&id=<?= $row ['id']?>">Detail</a>
+                                                <?php
+                                                if($sesi['role'] != ('staff' && 'manager')){   
+                                                    ?>    
+                                                <a class="btn btn-warning btn-sm" href="index.php?url=product_form&idedit=<?= $row ['id']?>">Ubah</a>
                                                     <button type="submit" class="btn btn-danger btn-sm" name="proses" value="hapus"
                                                     onclick="return confirm('Anda yakin data tersebuta akan dihapus')">Hapus</button>
+                                                    
                                                     <input type="hidden" name="idx" value="<?= $row['id']?>">
+                                                    <?php
+                                                }
+                                                    ?>
                                                 </form>
                                                 </td>
                                         </tr>
@@ -94,5 +109,8 @@ $data_produk = $model->dataProduk();
 </div>
 
                 <?php
+} else {
+    echo '<script> alert("Anda tidak boleh masuk");history.back();</script>';
+}
         // include_once 'bottom.php';
                 ?>
